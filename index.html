@@ -20,7 +20,11 @@
 <script>
     function runApp() {
       liff.getProfile().then(profile => {
-        
+        var array_dataLine = [profile.pictureUrl, profile.userId, profile.displayName, profile.statusMessage, liff.getDecodedIDToken().email]
+        var obj_dataLine = {img: profile.pictureUrl, userid: profile.userId, name: profile.displayName, lineid: profile.statusMessage, email:liff.getDecodedIDToken().email}
+
+        console.log(obj_dataLine)
+        console.log(array_dataLine)
         document.getElementById("pictureUrl").src = profile.pictureUrl;
         document.getElementById("userId").innerHTML = '<b>UserId:</b> ' + profile.userId;
         document.getElementById("displayName").innerHTML = '<b>DisplayName:</b> ' + profile.displayName;
