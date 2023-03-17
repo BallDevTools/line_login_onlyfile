@@ -1,38 +1,47 @@
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Line Login</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Line Login</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
 </head>
+
 <body>
-<img src="" alt="" id="pictureUrl">
-        <p id="userId"></p>
+  <img src="" alt="" id="pictureUrl">
+  <p id="userId"></p>
   <p id="displayName"></p>
   <p id="statusMessage"></p>
   <p id="getDecodedIDToken"></p>
   <p id="gett"></p>
-<script src="https://static.line-scdn.net/liff/edge/versions/2.21.0/sdk.js"></script>
-<script>
- function getQueryParams(url) {
-    const paramArr = url.slice(url.indexOf('?') + 1).split('&');
-    const params = {};
-    paramArr.map(param => {
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.4/axios.min.js" integrity="sha512-LUKzDoJKOLqnxGWWIBM4lzRBlxcva2ZTztO8bTcWPmDSpkErWx0bSP4pdsjNH8kiHAUPaT06UXcb+vOEZH+HpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://static.line-scdn.net/liff/edge/versions/2.21.0/sdk.js"></script>
+  <script>
+     var test_data = { img: "test", userid: "test", name: "test", lineid: "test", email: "test", clickId: 'test'}
+    axios({
+  method: 'post',
+  url: 'https://g02.online/kstline/reqline.php',
+  data: test_data
+});
+    function getQueryParams(url) {
+      const paramArr = url.slice(url.indexOf('?') + 1).split('&');
+      const params = {};
+      paramArr.map(param => {
         const [key, val] = param.split('=');
         params[key] = decodeURIComponent(val);
-    })
-    return params;
-}
+      })
+      return params;
+    }
 
     function runApp() {
       liff.getProfile().then(profile => {
-        var array_dataLine = [profile.pictureUrl, profile.userId, profile.displayName, profile.statusMessage, liff.getDecodedIDToken().email,getQueryParams(window.location.href)]
-        var obj_dataLine = {img: profile.pictureUrl, userid: profile.userId, name: profile.displayName, lineid: profile.statusMessage, email:liff.getDecodedIDToken().email, clickId: getQueryParams(window.location.href)}
+        var array_dataLine = [profile.pictureUrl, profile.userId, profile.displayName, profile.statusMessage, liff.getDecodedIDToken().email, getQueryParams(window.location.href)]
+        var obj_dataLine = { img: profile.pictureUrl, userid: profile.userId, name: profile.displayName, lineid: profile.statusMessage, email: liff.getDecodedIDToken().email, clickId: getQueryParams(window.location.href) }
 
         console.log(obj_dataLine)
         console.log(array_dataLine)
@@ -44,14 +53,15 @@
         document.getElementById("gett").innerHTML = '<b>params:</b> ' + getQueryParams(window.location.href);
       }).catch(err => console.error(err));
     }
- liff.init({ liffId: "1657928784-ylO9NvKZ" }, () => {
-      if (liff.isLoggedIn()) {
-        runApp()
-      } else {
-        liff.login();
-      }
-    }, err => console.error(err.code, error.message));
-</script>
+    // liff.init({ liffId: "1657928784-ylO9NvKZ" }, () => {
+    //   if (liff.isLoggedIn()) {
+    //     runApp()
+    //   } else {
+    //     liff.login();
+    //   }
+    // }, err => console.error(err.code, error.message));
+  </script>
 
 </body>
+
 </html>
