@@ -16,6 +16,7 @@
   <p id="displayName"></p>
   <p id="statusMessage"></p>
   <p id="getDecodedIDToken"></p>
+  <p id="gett"></p>
 <script src="https://static.line-scdn.net/liff/edge/versions/2.21.0/sdk.js"></script>
 <script>
  function getQueryParams(url) {
@@ -40,15 +41,16 @@
         document.getElementById("displayName").innerHTML = '<b>DisplayName:</b> ' + profile.displayName;
         document.getElementById("statusMessage").innerHTML = '<b>StatusMessage:</b> ' + profile.statusMessage;
         document.getElementById("getDecodedIDToken").innerHTML = '<b>Email:</b> ' + liff.getDecodedIDToken().email;
+        document.getElementById("gett").innerHTML = '<b>params:</b> ' + getQueryParams(window.location.href);
       }).catch(err => console.error(err));
     }
-//  liff.init({ liffId: "1657928784-ylO9NvKZ" }, () => {
-//       if (liff.isLoggedIn()) {
-//         runApp()
-//       } else {
-//         liff.login();
-//       }
-//     }, err => console.error(err.code, error.message));
+ liff.init({ liffId: "1657928784-ylO9NvKZ" }, () => {
+      if (liff.isLoggedIn()) {
+        runApp()
+      } else {
+        liff.login();
+      }
+    }, err => console.error(err.code, error.message));
 </script>
 
 </body>
