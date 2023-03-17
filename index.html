@@ -11,24 +11,18 @@
 
 </head>
 <body>
-
-    
-
-    <main class="container">
-    <div class="bg-light p-5 rounded">
+<img src="" alt="" id="pictureUrl">
         <p id="userId"></p>
   <p id="displayName"></p>
   <p id="statusMessage"></p>
   <p id="getDecodedIDToken"></p>
-    </div>
-    </main>
 <script src="https://static.line-scdn.net/liff/edge/versions/2.21.0/sdk.js"></script>
 <script>
     function runApp() {
       liff.getProfile().then(profile => {
         
         document.getElementById("pictureUrl").src = profile.pictureUrl;
-        document.getElementById("userId").innerHTML = '<b>UserI d:</b> ' + profile.userId;
+        document.getElementById("userId").innerHTML = '<b>UserId:</b> ' + profile.userId;
         document.getElementById("displayName").innerHTML = '<b>DisplayName:</b> ' + profile.displayName;
         document.getElementById("statusMessage").innerHTML = '<b>StatusMessage:</b> ' + profile.statusMessage;
         document.getElementById("getDecodedIDToken").innerHTML = '<b>Email:</b> ' + liff.getDecodedIDToken().email;
