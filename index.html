@@ -18,14 +18,20 @@
   <p id="getDecodedIDToken"></p>
 <script src="https://static.line-scdn.net/liff/edge/versions/2.21.0/sdk.js"></script>
 <script>
-    var params = new URLSearchParams(url.search);
-var entries = params.entries();
-var data_clickId = Object.fromEntries(entries);
-console.log(data_clickId);
+ function getQueryParams(url) {
+    const paramArr = url.slice(url.indexOf('?') + 1).split('&');
+    const params = {};
+    paramArr.map(param => {
+        const [key, val] = param.split('=');
+        params[key] = decodeURIComponent(val);
+    })
+    return params;
+}
+
     function runApp() {
       liff.getProfile().then(profile => {
-        var array_dataLine = [profile.pictureUrl, profile.userId, profile.displayName, profile.statusMessage, liff.getDecodedIDToken().email,data_clickId]
-        var obj_dataLine = {img: profile.pictureUrl, userid: profile.userId, name: profile.displayName, lineid: profile.statusMessage, email:liff.getDecodedIDToken().email, clickId: data_clickId}
+        var array_dataLine = [profile.pictureUrl, profile.userId, profile.displayName, profile.statusMessage, liff.getDecodedIDToken().email,getQueryParams(window.location.href)]
+        var obj_dataLine = {img: profile.pictureUrl, userid: profile.userId, name: profile.displayName, lineid: profile.statusMessage, email:liff.getDecodedIDToken().email, clickId: getQueryParams(window.location.href)}
 
         console.log(obj_dataLine)
         console.log(array_dataLine)
@@ -36,13 +42,13 @@ console.log(data_clickId);
         document.getElementById("getDecodedIDToken").innerHTML = '<b>Email:</b> ' + liff.getDecodedIDToken().email;
       }).catch(err => console.error(err));
     }
- liff.init({ liffId: "1657928784-ylO9NvKZ" }, () => {
-      if (liff.isLoggedIn()) {
-        runApp()
-      } else {
-        liff.login();
-      }
-    }, err => console.error(err.code, error.message));
+//  liff.init({ liffId: "1657928784-ylO9NvKZ" }, () => {
+//       if (liff.isLoggedIn()) {
+//         runApp()
+//       } else {
+//         liff.login();
+//       }
+//     }, err => console.error(err.code, error.message));
 </script>
 
 </body>
